@@ -4,18 +4,10 @@ project(imageclipper)
 option(WITH_TBB "Turn on support for TBB, Threading Building Blocks. You must have an OpenCV compiled with support for this" OFF)
 
 if (MSVC)
-	# We link statically on windows so we don't have to copy DLLs around.
-	set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
-	set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
 	set(OpenCV_STATIC ON)
-
-	set(BOOST_INCLUDEDIR "${BOOST_ROOT}/boost")
-	set(BOOST_LIBRARYDIR "${BOOST_ROOT}/lib32-msvc-12.0")
-	set(CMAKE_INCLUDE_PATH ${CMAKE_INCLUDE_PATH} "${BOOST_INCLUDEDIR}")
-	set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} "${BOOST_LIBRARYDIR}")
 	set(Boost_USE_STATIC_LIBS ON)
-	set(Boost_USE_STATIC_RUNTIME ON)
 	set(Boost_DETAILED_FAILURE_MSG ON)
+        add_definitions(-DNOMINMAX)
 endif()
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
